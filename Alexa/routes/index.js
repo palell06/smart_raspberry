@@ -14,4 +14,8 @@ function contact(req, res) {
 }
 exports.contact = contact;
 ;
+function command(req, res) {
+    res.render('command', { title: 'command', year: new Date().getFullYear(), message: 'Your command page' });
+}
+exports.command = command;
 //# sourceMappingURL=index.js.map

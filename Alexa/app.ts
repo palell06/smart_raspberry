@@ -3,6 +3,12 @@ import routes = require('./routes/index');
 import http = require('http');
 import path = require('path');
 
+var config = require('./config');
+var helper = require('./helper');
+var wolfram = require('./lib/wolfram');
+var openhab = require('./lib/openhab');
+
+
 var app = express();
 
 // all environments
@@ -28,6 +34,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/about', routes.about);
 app.get('/contact', routes.contact);
+app.get('/command', routes.command);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

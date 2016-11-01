@@ -1,0 +1,2 @@
+c:\users\pme\documents\visual studio 2015\Projects\Alexa-HA\Alexa-HA\obj\Debug\Alexa-HA.njsprojResolveAssemblyReference.cache
+c:\users\pme\documents\visual studio 2015\Projects\Alexa-HA\Alexa-HA\bin\Microsoft.NodejsTools.WebRole.dll

@@ -79,8 +79,10 @@
     <Content Include="bin\node.cmd" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="apps\api\" />
     <Folder Include="bin\" />
     <Folder Include="lib\" />
+    <Folder Include="apps\" />
     <Folder Include="public\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\images\" />

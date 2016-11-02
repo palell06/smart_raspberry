@@ -44,16 +44,52 @@ http.createServer(app).listen(app.get('port'), function () {
 var alexaAppServer = require('alexa-app-server');
 var server = new alexaAppServer({
     server_root: __dirname,
+    public_html : 'public',
     app_dir: "apps",
     app_root: "/api/",
-    port: 80,
+    port: 8080,
     debug: true,
-    log: true
+    log: true,
+    pre: function (appServer)
+    {
+        console.log("pre");
+    },
+
+    // The post() method is called after the server has started and the start() method 
+    // is ready to exit. It is passed the AlexaAppServer object itself.
+    post: function (appServer)
+    {
+        console.log("post");
+    },
+
+    // Like pre(), but this function is fired on every request, but before the 
+    // application itself gets called. You can use this to load up user details before
+    // every request, for example, and insert it into the json request itself for
+    // the application to use.
+    // If it returns a falsy value, the request json is not changed.
+    // If it returns a non-falsy value, the request json is replaced with what was returned.
+    // If it returns a Promise, request processing pauses until the Promise resolves.
+    //    The value passed on by the promise (if any) replaces the request json.
+    preRequest: function (json, request, response)
+    {
+        console.log("preRequest");
+    },
+
+    // Like post(), but this function is fired after every request. It has a final 
+    // opportunity to modify the JSON response before it is returned back to the
+    // Alexa service.
+    // If it returns a falsy value, the response json is not changed.
+    // If it returns a non-falsy value, the response json is replaced with what was returned.
+    // If it returns a Promise, response processing pauses until the Promise resolves.
+    //    The value passed on by the promise (if any) replaces the response json.
+    postRequest: function (json, request, response)
+    {
+        console.log("postRequest");
+    },
 }
 );
 
-
-server.express.use('/test', function (req, res) { res.send("OK"); });
+server.start();
 
 var appName = config.applicationName;
 

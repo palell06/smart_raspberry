@@ -16,5 +16,7 @@ export function contact(req: express.Request, res: express.Response) {
 };
 
 export function command(req: express.Request, res: express.Response) {
+    
     res.render('command', { title: 'command', year: new Date().getFullYear(), message: 'Your command page' });
 }
+

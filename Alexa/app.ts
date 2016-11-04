@@ -53,7 +53,10 @@ var server = new alexaAppServer({
     // The pre() method is called after the express server has been instantiated,
     // but before and Alexa Apps have been loaded. It is passed the AlexaAppServer 
     // object itself.
-    pre : function (appServer) { },
+    pre: function (appServer)
+    {
+
+    },
 
     // The post() method is called after the server has started and the start() method 
     // is ready to exit. It is passed the AlexaAppServer object itself.
@@ -97,7 +100,7 @@ server.express.set('view engine', 'jade');
 //server.express.use(server.express.static(path.join(__dirname, 'public')));
 
 import routes = require('./routes/index');
-server.express.use('/', routes.index);
-server.express.use('/about', routes.about);
-server.express.use('/contact', routes.contact);
-server.express.use('/command', routes.command);
+server.express.get('/', routes.index);
+server.express.get('/about', routes.about);
+server.express.get('/contact', routes.contact);
+server.express.get('/command', routes.command);

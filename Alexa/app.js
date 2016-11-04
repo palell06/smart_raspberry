@@ -36,12 +36,13 @@ http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });*/
 var alexaAppServer = require('alexa-app-server');
+
 var server = new alexaAppServer({
     server_root: __dirname,
     app_dir: "apps",
     public_html: "public",
     app_root: "/api/",
-    server_dir: "routes",
+    server_dir: "server",
     port: process.env.PORT || 3000,
     debug: true,
     log: true,
@@ -70,6 +71,7 @@ var server = new alexaAppServer({
     //    The value passed on by the promise (if any) replaces the response json.
     postRequest: function (json, request, response) { }
 });
+
 server.start();
 server.express.set('views', path.join(__dirname, 'views'));
 server.express.set('view engine', 'jade');

@@ -99,8 +99,8 @@ server.express.set('view engine', 'jade');
 //server.express.use(stylus.middleware(path.join(__dirname, 'public')));
 //server.express.use(server.express.static(path.join(__dirname, 'public')));
 
-import routes = require('./routes/index');
-server.express.get('/', routes.index);
-server.express.get('/about', routes.about);
-server.express.get('/contact', routes.contact);
-server.express.get('/command', routes.command);
+//import routes = require('./routes/index');
+//server.express.get('/', routes.index);
+//server.express.get('/about', routes.about);
+//server.express.get('/contact', routes.contact);
+//server.express.get('/command', routes.command);

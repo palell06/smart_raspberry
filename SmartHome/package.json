@@ -1,0 +1,17 @@
+{
+  "name": "smart-home",
+  "version": "0.0.0",
+  "description": "SmartHome",
+  "main": "app.js",
+  "author": {
+    "name": "Palell90"
+  },
+  "dependencies": {
+    "alexa-app": "^2.3.4",
+    "alexa-app-server": "^2.2.4",
+    "express": "3.4.4",
+    "jade": "*",
+    "request": "^2.78.0",
+    "stylus": "*"
+  }
+}

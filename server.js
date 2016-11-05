@@ -1,12 +1,13 @@
-﻿var AlexaAppServer = require('alexa-app-server');
+
+var AlexaAppServer = require('alexa-app-server');
 AlexaAppServer.start({
-    server_root:__dirname,     // Path to root 
-    public_html:"public_html", // Static content 
-    app_dir:"apps",            // Where alexa-app modules are stored 
-    app_root:"/api/",        // Service root 
+    server_root: __dirname,
+    public_html: "public_html",
+    app_dir: "apps",
+    app_root: "/api/",
     port: process.env.PORT || 3000,
     debug: true,
-    log: true,                    // What port to use, duh
+    log: true,
     // The pre() method is called after the express server has been instantiated,
     // but before and Alexa Apps have been loaded. It is passed the AlexaAppServer 
     // object itself.

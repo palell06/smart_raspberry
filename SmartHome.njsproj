@@ -67,6 +67,7 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public_html\index.html" />
     <Content Include="README.md" />
+    <Content Include="routes\index.js.map" />
     <Content Include="views\about.jade" />
     <Content Include="views\contact.jade" />
     <Content Include="views\index.jade" />
@@ -74,17 +75,12 @@
     <Content Include="views\test.ejs" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
-    <Content Include="bin\ChangeConfig.ps1" />
-    <Content Include="bin\download.ps1" />
-    <Content Include="bin\setup_web.cmd" />
-    <Content Include="bin\node.cmd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="apps\" />
     <Folder Include="apps\hello_world\" />
     <Folder Include="apps\openhab\" />
     <Folder Include="apps\number_guessing_game\" />
-    <Folder Include="bin\" />
     <Folder Include="lib\" />
     <Folder Include="server\" />
     <Folder Include="public\" />
@@ -93,7 +89,6 @@
     <Folder Include="public\javascripts\" />
     <Folder Include="public\stylesheets\" />
     <Folder Include="public_html\" />
-    <Folder Include="routes\" />
     <Folder Include="Scripts\" />
     <Folder Include="Scripts\typings\" />
     <Folder Include="Scripts\typings\express\" />

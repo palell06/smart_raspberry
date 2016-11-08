@@ -1,0 +1,11 @@
+﻿{
+  "name": "Switch",
+  "Greeting": "Do you want me to turn something on or off?",
+  "Utterances": [
+    "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {in the |} {-|Location}",
+    "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName}",
+    "{to |} {turn|switch|flip} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action}",
+    "{to |} {turn|switch|flip} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action} {in the |} {-|Location}"
+  ],
+  "Debug": true
+}

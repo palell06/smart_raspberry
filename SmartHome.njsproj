@@ -33,7 +33,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="routes\index.ts" />
     <TypeScriptCompile Include="Scripts\typings\express\express.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\stylus\stylus.d.ts" />
@@ -42,6 +41,9 @@
     <Content Include="apps\hello_world\package.json" />
     <Content Include="apps\number_guessing_game\package.json" />
     <Content Include="apps\openhab\package.json" />
+    <Content Include="apps\switch\package.json" />
+    <Content Include="config\config.json" />
+    <Content Include="config\switch.json" />
     <Content Include="public\javascripts\bootstrap.js" />
     <Content Include="public\javascripts\bootstrap.min.js" />
     <Content Include="public\javascripts\jquery-1.10.2.intellisense.js" />
@@ -67,7 +69,6 @@
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="public_html\index.html" />
     <Content Include="README.md" />
-    <Content Include="routes\index.js.map" />
     <Content Include="views\about.jade" />
     <Content Include="views\contact.jade" />
     <Content Include="views\index.jade" />
@@ -79,9 +80,11 @@
   <ItemGroup>
     <Folder Include="apps\" />
     <Folder Include="apps\hello_world\" />
+    <Folder Include="apps\switch\" />
     <Folder Include="apps\openhab\" />
     <Folder Include="apps\number_guessing_game\" />
     <Folder Include="lib\" />
+    <Folder Include="config\" />
     <Folder Include="server\" />
     <Folder Include="public\" />
     <Folder Include="public\fonts\" />
@@ -100,9 +103,11 @@
     <Compile Include="apps\hello_world\index.js" />
     <Compile Include="apps\number_guessing_game\index.js" />
     <Compile Include="apps\openhab\index.js" />
+    <Compile Include="apps\switch\index.js" />
     <Compile Include="config.js" />
     <Compile Include="helper.js" />
     <Compile Include="lib\openhab.js" />
+    <Compile Include="lib\switch.js" />
     <Compile Include="lib\wolfram.js" />
     <Compile Include="server.js" />
   </ItemGroup>

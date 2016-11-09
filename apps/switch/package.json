@@ -1,7 +1,7 @@
 {
   "name": "switch",
   "version": "1.0.0",
-  "description": "OpenHAB switch for Amazon Alexa",
+  "description": "OpenHAB home automation switch for Amazon Alexa",
   "main": "index.js",
   "author": "Pål Ellefsen",
   "license": "ISC",

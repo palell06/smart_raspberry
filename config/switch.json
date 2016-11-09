@@ -1,11 +1,33 @@
 ﻿{
-  "name": "Switch",
-  "Greeting": "Do you want me to turn something on or off?",
-  "Utterances": [
-    "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {in the |} {-|Location}",
-    "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName}",
-    "{to |} {turn|switch|flip} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action}",
-    "{to |} {turn|switch|flip} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action} {in the |} {-|Location}"
-  ],
-  "Debug": true
+  "Data": {
+    "Name": "Switch",
+    "ApplicationId": "",
+    "UserId": "",
+    "Password": "",
+    "Greeting": "Do you want me to turn something on or off?",
+    "Utterances": {
+      "Switch": [
+        "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {in the |} {-|Location}",
+        "{to |} {turn|switch|flip} {ON|OFF|Action} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName}",
+        "{to |} {turn|switch|flip} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action}",
+        "{to |} {turn|switch|flip} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action} {in the |} {-|Location}"
+      ],
+      "Stop": [
+        "{to |} stop {that |}",
+        "{to |} quit {that |}",
+        "{to |} exit {that |}",
+        "{to |} never mind {that |}"
+      ],
+      "Cancel": [
+        "{to |} cancel {that |}"
+      ],
+      "Help": [
+        "{for|to |} help {me |}"
+      ]
+    },
+    "Help": {
+      "Say": "",
+      "Card": ""
+    }
+  }
 }

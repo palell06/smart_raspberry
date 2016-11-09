@@ -107,8 +107,9 @@
     <Compile Include="config.js" />
     <Compile Include="helper.js" />
     <Compile Include="config\configuration.js" />
+    <Compile Include="lib\AlexaUtil.js" />
+    <Compile Include="lib\HA_Util.js" />
     <Compile Include="lib\openhab.js" />
-    <Compile Include="lib\switch.js" />
     <Compile Include="lib\wolfram.js" />
     <Compile Include="server.js" />
   </ItemGroup>

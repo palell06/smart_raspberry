@@ -1,3 +1,6 @@
+var config = require("./config/configuration");
+console.log(config.getItem("lights", "living room").toString('utf8'));
+
 
 var AlexaAppServer = require('alexa-app-server');
 AlexaAppServer.start({

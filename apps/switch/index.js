@@ -1,5 +1,6 @@
 ﻿var alexa = require("alexa-app");
-var config = require("../../config/switch");
+var switch_config = require("../../config/switch");
+var general_config = require("../../config/config");
 var _switch = require("../../lib/switch");
 
 module.change_code = 1;
@@ -11,12 +12,12 @@ app.launch(function (request, response) {
 
     response.say(config.greeting);
 
-    response.shouldEndSession(false, "Okay");
+    response.shouldEndSession(false, "How can I help?");
 });                                          
 
 app.sessionEnded(function (request, response)
 {
-
+    
 });
 
 app.messages.NO_INTENT_FOUND = "I am uncertain what you mean. Kindly rephrase...";
@@ -59,7 +60,7 @@ app.intent("switch",
     },
     function (request, response)
     {
-        var itemName = request.slot("ItemName").toUpperCase();
+        var itemName = request.slot("ItemType").toUpperCase();
         var action = request.slot("Action").toUpperCase();
         var location = request.slot("Location").toUpperCase();
 

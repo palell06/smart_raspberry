@@ -1,17 +1,22 @@
-﻿var config = require("./config");
+﻿var config = require("./config.json");
 
 function getItem(itemType, location)
 {
     itemType = washItemType(itemType);
     location = washLocation(location);
+    console.log(config);
 
     for (var key in config.Data.Items)
     {
-        if (config.Data.Items.hasOwnProperty(itemType))
+        console.log(key.toUpperCase());
+        console.log(itemType.toUpperCase());
+        if (key.toUpperCase() === itemType.toUpperCase())
         {
-            return config.item[itemType][location];
+            return config.Data.Items[itemType][location];
         }
     }
+    console.log(location);
+    console.log(itemType);
 
     return false;
 }

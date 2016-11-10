@@ -1,5 +1,5 @@
 {
-  "name": "switch",
+  "name": "home",
   "version": "1.0.0",
   "description": "OpenHAB home automation switch for Amazon Alexa",
   "main": "index.js",

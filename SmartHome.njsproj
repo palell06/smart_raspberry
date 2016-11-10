@@ -41,9 +41,9 @@
     <Content Include="apps\hello_world\package.json" />
     <Content Include="apps\number_guessing_game\package.json" />
     <Content Include="apps\openhab\package.json" />
-    <Content Include="apps\switch\package.json" />
+    <Content Include="apps\home\package.json" />
     <Content Include="config\config.json" />
-    <Content Include="config\switch.json" />
+    <Content Include="config\home.json" />
     <Content Include="public\javascripts\bootstrap.js" />
     <Content Include="public\javascripts\bootstrap.min.js" />
     <Content Include="public\javascripts\jquery-1.10.2.intellisense.js" />
@@ -80,7 +80,7 @@
   <ItemGroup>
     <Folder Include="apps\" />
     <Folder Include="apps\hello_world\" />
-    <Folder Include="apps\switch\" />
+    <Folder Include="apps\home\" />
     <Folder Include="apps\openhab\" />
     <Folder Include="apps\number_guessing_game\" />
     <Folder Include="lib\" />
@@ -103,7 +103,7 @@
     <Compile Include="apps\hello_world\index.js" />
     <Compile Include="apps\number_guessing_game\index.js" />
     <Compile Include="apps\openhab\index.js" />
-    <Compile Include="apps\switch\index.js" />
+    <Compile Include="apps\home\index.js" />
     <Compile Include="config.js" />
     <Compile Include="helper.js" />
     <Compile Include="config\configuration.js" />

@@ -48,6 +48,5 @@ function washLocation(location)
 module.exports.getItem = getItem;
 module.exports.debug = config.Data.Debug;
 module.exports.protocol = config.Data.Protocol;
-module.exports.endpoint = config.Data.Endpoint;
+module.exports.server = config.Data.Server;
 module.exports.HA_port = config.Data.HA_port;
-module.exports.help = config.Data.help;

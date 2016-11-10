@@ -10,7 +10,7 @@
         "bedroom": "Light_Group_Bed",
         "office": "Light_Group_Office",
         "kitchen": "Light_Group_Kitchen",
-        "living": "Light_Group_Living",
+        "living": "lightstrip_hue_4_color",
         "great": "Light_Group_Great",
         "house": "Light_Group_All",
         "all": "Light_Group_All",

@@ -1,12 +1,12 @@
 ﻿var alexa = require("alexa-app");
-var switch_config = require("../../config/switch");
+var home_config = require("../../config/home");
 var config = require("../../config/configuration");
 var util = require("../../lib/AlexaUtil");
 var home_automation = require("../../lib/HA_util");
 
 module.change_code = 1;
 
-var appName = switch_config.Data.Name;
+var appName = home_config.Data.Name;
 
 var app = new alexa.app(appName);
 
@@ -47,7 +47,7 @@ app.pre = function (request, response, type) {
     }
 };
 
-app.intent("switch",
+app.intent("SwitchIntent",
     {
         "slots":
         {
@@ -55,7 +55,7 @@ app.intent("switch",
             "Location": "LOCATION_TYPE",
             "Action": "LITERAL"
         },
-        "utterances": switch_config.Data.Utterances.Switch
+        "utterances": home_config.Data.Utterances.Switch
     },
     function (request, response) {
         var itemType = request.slot("ItemType").toUpperCase();
@@ -99,7 +99,7 @@ app.intent("switch",
 
 app.intent("StopIntent",
     {
-        "utterances": switch_config.Data.Utterances.Stop
+        "utterances": home_config.Data.Utterances.Stop
     }, function (request, response) {
         if (config.debug) {
             console.log("Stopping...");
@@ -110,7 +110,7 @@ app.intent("StopIntent",
 
 app.intent("CancelIntent",
     {
-        "utterances": switch_config.Data.Utterances.Cancel
+        "utterances": home_config.Data.Utterances.Cancel
     }, function (request, response) {
         if (config.debug) {
             console.log("Cancelling...");
@@ -121,7 +121,7 @@ app.intent("CancelIntent",
 
 app.intent("HelpIntent",
     {
-        "utterances": switch_config.Data.Utterances.Help
+        "utterances": home_config.Data.Utterances.Help
     }, function (request, response) {
         if (config.debug) {
             console.log("Helping...");

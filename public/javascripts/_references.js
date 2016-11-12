@@ -3,6 +3,7 @@
 /// <reference path="../../config.js" />
 /// <reference path="../../config/configuration.js" />
 /// <reference path="../../helper.js" />
+/// <reference path="../../lib/AlexaUtil.js" />
 /// <reference path="../../lib/Db.js" />
 /// <reference path="../../lib/HA_Util.js" />
 /// <reference path="../../server.js" />

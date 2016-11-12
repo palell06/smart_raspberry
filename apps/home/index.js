@@ -35,14 +35,14 @@ app.pre = function (request, response, type) {
     var applicationId = request.sessionDetails.application.applicationId;
 
     logRequest(request, "Home", "Received request", "info");
-
-    if (config.debug) {
+  
+    if (config.debug === true) {
         // Log the request
         console.log(address + ' - ' + timestamp + ' - ' + ' AWS ASK ' + type + ' received: ' + requestId + ' / ' + sessionId);
     }
 
     if (applicationId !== switch_config.Data.applicationId) {
-        if (config.debug) {
+        if (config.debug === true) {
             console.log(address + ' - ' + timestamp + ' - ERROR: Invalid application ID in request:' + applicationId);
         }
 
@@ -67,7 +67,7 @@ app.intent("SwitchIntent",
         var action = request.slot("Action").toUpperCase();
         var location = request.slot("Location").toUpperCase();    
 
-        if (config.Debug) {
+        if (config.Debug === true) {
             console.log("Switch intent slots: Action=\"" + action + "\", ItemName=\"" + itemName + "\" Location=\"" + location + "\"");
         }
 
@@ -82,7 +82,7 @@ app.intent("SwitchIntent",
         if (action && itemType && location && item) {
             home_automation.getState(item, function (error, state) {
                 if (error) {
-                    if (config.debug) {
+                    if (config.debug === true) {
                         console.log("Unable to get the state of " + item + ": " + error.message);
                     }
 
@@ -116,7 +116,7 @@ app.intent("StopIntent",
     {
         "utterances": home_config.Data.Utterances.Stop
     }, function (request, response) {
-        if (config.debug) {
+        if (config.debug === true) {
             console.log("Stopping...");
         }
         logRequest(request, "Switch", "Stopping...", "info");
@@ -127,7 +127,7 @@ app.intent("CancelIntent",
     {
         "utterances": home_config.Data.Utterances.Cancel
     }, function (request, response) {
-        if (config.debug) {
+        if (config.debug === true) {
             console.log("Cancelling...");
         }
         logRequest(request, "Switch", "Cancelling...", "info");
@@ -138,7 +138,7 @@ app.intent("HelpIntent",
     {
         "utterances": home_config.Data.Utterances.Help
     }, function (request, response) {
-        if (config.debug) {
+        if (config.debug === true) {
             console.log("Helping...");
         }
         logRequest(request, "Switch", "Helping...", "info");

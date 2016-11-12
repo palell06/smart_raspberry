@@ -40,8 +40,23 @@ function washLocation(location)
     return location;
 }
 
-module.exports.getItem = getItem;
+/* Variables */
 module.exports.debug = config.Data.Debug;
-module.exports.protocol = config.Data.Protocol;
-module.exports.server = config.Data.Server;
-module.exports.HA_port = config.Data.HA_port;
+
+/* Functions */
+module.exports.getItem = getItem;
+
+/* Web */
+module.exports.WebProtocol = config.Data.Web.Protocol;
+module.exports.WebServer = config.Data.Web.Server;
+module.exports.WebPort = config.Data.Web.Port;
+module.exports.Username = config.Data.Web.Username;
+module.exports.Password = config.Data.Web.Password;
+
+/* Database */
+module.exports.DatabaseProtocol = config.Data.Database.Protocol;
+module.exports.DatabaseServer = config.Data.Database.Server;
+module.exports.DatabasePort = config.Data.Database.Port;
+module.exports.Database = config.Data.Database.Database;
+module.exports.DatabaseUsername = config.Data.Database.Username;
+module.exports.DatabasePassword = config.Data.Database.Password;

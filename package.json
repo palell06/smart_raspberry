@@ -11,6 +11,7 @@
     "alexa-app-server": "^2.2.4",
     "express": "3.4.4",
     "jade": "*",
+    "mongodb": "^2.2.11",
     "request": "^2.78.0",
     "stylus": "*"
   }

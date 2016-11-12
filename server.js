@@ -1,25 +1,3 @@
-/*var config = require("./config/configuration");
-var itemType = "lights";
-var location = "living room";
-var item = config.getItem(itemType, location);
-var home_automation = require("./lib/HA_Util");
-
-home_automation.getState(item, function (error, state) {
-    if (error) {
-        console.log("Unable to get the state of " + item + ": " + error.message);
-    }
-    var action = "OFF";
-
-    if (state === action) {
-        console.log("Your " + location + " " + itemType + " is already " + action);
-    }
-    else if (state !== action) {
-        home_automation.setState(item, action);
-        console.log("Switching " + action + " your " + location + " " + item);
-    } else {
-        console.log("I could not switch " + action + " your " + location + " " + item);
-    }
-});*/
 
 var AlexaAppServer = require('alexa-app-server');
 AlexaAppServer.start({

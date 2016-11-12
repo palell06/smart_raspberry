@@ -1,9 +1,21 @@
 ﻿{
   "Data": {
-    "Protocol":  "http",
-    "Server": "cm-84.211.129.209.getinternet.no",
-    "HA_port":  "8080",
     "Debug": true,
+    "Web": {
+      "Protocol": "http",
+      "Server": "cm-84.211.129.209.getinternet.no",
+      "Port": "8080",
+      "Username": "",
+      "Password": ""
+    },
+    "Database": {
+      "Protocol":  "mongodb",
+      "Server": "cm-84.211.129.209.getinternet.no",
+      "Port": "27017",
+      "Database": "HomeAutomation",
+      "Username": "Alexa",
+      "Password": "13jkjygn"
+    },
     "Locations": [ "all", "house", "living", "great", "kitchen", "master bedroom", "guest bedroom", "data center", "garage", "office", "foyer", "utility", "inside", "indoor", "outside", "outdoor" ],
     "Items": {
       "Lights": {

@@ -1,5 +1,7 @@
 
 var AlexaAppServer = require('alexa-app-server');
+var db = require('lib/Db');
+
 AlexaAppServer.start({
     server_root: __dirname,
     public_html: "public_html",
@@ -12,6 +14,7 @@ AlexaAppServer.start({
     // but before and Alexa Apps have been loaded. It is passed the AlexaAppServer 
     // object itself.
     pre: function (appServer) {
+
     },
     // The post() method is called after the server has started and the start() method 
     // is ready to exit. It is passed the AlexaAppServer object itself.
@@ -24,7 +27,9 @@ AlexaAppServer.start({
     // If it returns a non-falsy value, the request json is replaced with what was returned.
     // If it returns a Promise, request processing pauses until the Promise resolves.
     //    The value passed on by the promise (if any) replaces the request json.
-    preRequest: function (json, request, response) { },
+    preRequest: function (json, request, response) {
+        logRequest(request, "Server", "Received request...", "info");
+    },
     // Like post(), but this function is fired after every request. It has a final 
     // opportunity to modify the JSON response before it is returned back to the
     // Alexa service.
@@ -32,5 +37,7 @@ AlexaAppServer.start({
     // If it returns a non-falsy value, the response json is replaced with what was returned.
     // If it returns a Promise, response processing pauses until the Promise resolves.
     //    The value passed on by the promise (if any) replaces the response json.
-    postRequest: function (json, request, response) { }
+    postRequest: function (json, request, response) {
+        logRequest(request, "Server", "Finished processing request", "info");
+    }
 });

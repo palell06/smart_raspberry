@@ -4,19 +4,14 @@ function getItem(itemType, location)
 {
     itemType = washItemType(itemType);
     location = washLocation(location);
-    console.log(config);
 
     for (var key in config.Data.Items)
     {
-        console.log(key.toUpperCase());
-        console.log(itemType.toUpperCase());
         if (key.toUpperCase() === itemType.toUpperCase())
         {
             return config.Data.Items[itemType][location];
         }
     }
-    console.log(location);
-    console.log(itemType);
 
     return false;
 }
@@ -27,7 +22,7 @@ function washItemType(itemType)
 
     if (itemType === "LIGHTING" || itemType === "LIGHTS" || itemType === 'LIGHT')
     {
-        itemType = "Light";
+        itemType = "Lights";
     }
 
     return itemType;

@@ -78,12 +78,12 @@ app.intent("SwitchIntent",
                 if (error && config.debug) {
                     console.log("Unable to get the state of " + item + ": " + error.message);
                 }
-
-                if (state === action) {
+                var NextAction = action.toUpperCase();
+                if (state === NextAction) {
                     util.replayWith("Your " + location + " " + itemType + " is already " + action, response);
                 }
                 else if (state !== action) {
-                    home_automation.setState(item, action);
+                    home_automation.setState(item, NextAction);
                     replyWith("Switching " + action + " your " + location + " " + item, response);
                 } else {
                     replyWith("I could not switch " + action + " your " + location + " " + item, response);

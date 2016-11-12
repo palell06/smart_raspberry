@@ -2,7 +2,7 @@
 var home_config = require("../../config/home");
 var config = require("../../config/configuration");
 var util = require("../../lib/AlexaUtil");
-var home_automation = require("../../lib/HA_util");
+var home_automation = require("../../lib/HA_Util");
 
 module.change_code = 1;
 

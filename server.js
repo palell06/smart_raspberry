@@ -1,6 +1,6 @@
 
 var AlexaAppServer = require('alexa-app-server');
-var db = require('lib/Db');
+var db = require('./lib/Db');
 
 AlexaAppServer.start({
     server_root: __dirname,
@@ -28,6 +28,7 @@ AlexaAppServer.start({
     // If it returns a Promise, request processing pauses until the Promise resolves.
     //    The value passed on by the promise (if any) replaces the request json.
     preRequest: function (json, request, response) {
+        console.log("shie");
         logRequest(request, "Server", "Received request...", "info");
     },
     // Like post(), but this function is fired after every request. It has a final 

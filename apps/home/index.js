@@ -27,6 +27,8 @@ app.sessionEnded(function (request, response)
 app.messages.NO_INTENT_FOUND = "I am uncertain what you mean. Kindly rephrase...";
 
 app.pre = function (request, response, type) {
+
+    console.log(request.toString('utf8'));
     var address = request.data.remoteAddress;
     var timestamp = request.data.request.timestamp;
     var requestId = request.data.request.requestId;

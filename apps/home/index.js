@@ -3,6 +3,7 @@ var home_config = require("../../config/home");
 var config = require("../../config/configuration");
 var util = require("../../lib/AlexaUtil");
 var home_automation = require("../../lib/HA_Util");
+var db = require("../../lib/Db");
 
 module.change_code = 1;
 
@@ -20,7 +21,7 @@ app.launch(function (request, response) {
 
 app.sessionEnded(function (request, response)
 {
-    logRequest(request, "Switch", "Ending session...", "info");
+    db.logRequest(request, "Switch", "Ending session...", "info");
     response.say("Bye...");
 });
 
@@ -36,7 +37,7 @@ app.pre = function (request, response, type) {
     var userId = request.sessionDetails.userId;
     var applicationId = request.sessionDetails.application.applicationId;
 
-    logRequest(request, "Home", "Received request", "info");
+    db.logRequest(request, "Home", "Received request", "info");
   
     if (config.debug === true) {
         // Log the request
@@ -48,7 +49,7 @@ app.pre = function (request, response, type) {
             console.log(address + ' - ' + timestamp + ' - ERROR: Invalid application ID in request:' + applicationId);
         }
 
-        logRequest(request, "Home", "Invalid applicationId", "error");
+        db.logRequest(request, "Home", "Invalid applicationId", "error");
 
         response.fail("Invalid application ID");
     }
@@ -76,7 +77,7 @@ app.intent("SwitchIntent",
         if (itemType && location) {
             var item = config.getItem(itemType, location);
         } else {
-            logRequest(request, "Switch", "Action: " + action + " ItemType: " + itemType + " Location: " + Location + ". Unable to find correct item. Please check the configuration of the home automation controller" , "error");
+            db.logRequest(request, "Switch", "Action: " + action + " ItemType: " + itemType + " Location: " + Location + ". Unable to find correct item. Please check the configuration of the home automation controller" , "error");
             util.replayWith("I cannot switch that", response);
             return;
         }
@@ -88,25 +89,25 @@ app.intent("SwitchIntent",
                         console.log("Unable to get the state of " + item + ": " + error.message);
                     }
 
-                    logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
+                    db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
                 }
 
                 var NextAction = action.toUpperCase();
                 if (state === NextAction) {
-                    logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
+                    db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
                     util.replayWith("Your " + location + " " + itemType + " is already " + action, response);
                 }
                 else if (state !== action) {
                     home_automation.setState(item, NextAction);
-                    logRequest(request, "Switch", "Switching " + action + " your " + location + " " + item, "info");
+                    db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + item, "info");
                     replyWith("Switching " + action + " your " + location + " " + item, response);
                 } else {
-                    logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + item, "error");
+                    db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + item, "error");
                     replyWith("I could not switch " + action + "in your " + location + " " + item, response);
                 }
             });
         } else {
-            logRequest(request, "Switch", "I cannot currently switch your " + location + " " + item, "error");
+            db.logRequest(request, "Switch", "I cannot currently switch your " + location + " " + item, "error");
             replyWith("I cannot currently switch your " + location + " " + item, response);
         }
 
@@ -121,7 +122,7 @@ app.intent("StopIntent",
         if (config.debug === true) {
             console.log("Stopping...");
         }
-        logRequest(request, "Switch", "Stopping...", "info");
+        db.logRequest(request, "Switch", "Stopping...", "info");
         response.say("Bye").send();
     });
 
@@ -132,7 +133,7 @@ app.intent("CancelIntent",
         if (config.debug === true) {
             console.log("Cancelling...");
         }
-        logRequest(request, "Switch", "Cancelling...", "info");
+        db.logRequest(request, "Switch", "Cancelling...", "info");
         response.say("Bye").send();
     });
 
@@ -143,7 +144,7 @@ app.intent("HelpIntent",
         if (config.debug === true) {
             console.log("Helping...");
         }
-        logRequest(request, "Switch", "Helping...", "info");
+        db.logRequest(request, "Switch", "Helping...", "info");
         response.say(config.help.say.toString()).reprompt("What would you like to do?").shouldEndSession(false);
         response.card(appName, config.help.card.toString());
     });

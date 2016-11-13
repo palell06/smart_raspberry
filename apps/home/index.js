@@ -71,7 +71,7 @@ app.intent("SwitchIntent",
     {
         "slots":
         {
-            "ItemType": "LITERAL",
+            "ItemName": "LITERAL",
             "Location": "LOCATION_TYPE",
             "Action": "LITERAL"
         },
@@ -92,6 +92,8 @@ app.intent("SwitchIntent",
             if (itemType && location) {
 
                 var item = config.getItem(itemType, location);
+            } else if (itemType && !location) {
+                var item = config.getItem(itemType, "all"); 
             } else {
                 //db.logRequest(request, "Switch", "Action: " + action + " ItemType: " + itemType + " Location: " + Location + ". Unable to find correct item. Please check the configuration of the home automation controller", "error");
                 util.replyWith("I cannot switch that", appName, response);
@@ -105,7 +107,7 @@ app.intent("SwitchIntent",
                             console.log("Unable to get the state of " + item + ": " + error.message);
                         }
 
-                        db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
+                        //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
                     }
 
                     var NextAction = action.toUpperCase();
@@ -122,16 +124,43 @@ app.intent("SwitchIntent",
                         util.replyWith("I could not switch " + action + "in your " + location + " " + itemType, appName, response);
                     }
                 });
-            } else {
+            } else if (action && itemType && item && !location) {
+                home_automation.getState(item, function (error, state) {
+                    if (error) {
+                        if (config.debug === true) {
+                            console.log("Unable to get the state of " + item + ": " + error.message);
+                        }
+
+                        //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
+                    }
+
+                    var NextAction = action.toUpperCase();
+                    if (state === NextAction) {
+                        //db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
+                        util.replyWith("The " + itemType + " is already " + action, appName, response);
+                    }
+                    else if (state !== action) {
+                        home_automation.setState(item, NextAction);
+                        //db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + itemType, "info");
+                        util.replyWith("Switching " + action +  " " + itemType, appName, response);
+                    } else {
+                        //db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + itemType, "error");
+                        util.replyWith("I could not switch " + action + + " " + itemType, appName, response);
+                    }
+                });
+            }
+            else if (location) {
                 //db.logRequest(request, "Switch", "I cannot currently switch your " + location + " " + itemType, "error");
                 util.replyWith("I cannot currently switch your " + location + " " + itemType, appName, response);
+            }
+            else {
+                //db.logRequest(request, "Switch", "I cannot currently switch your " + location + " " + itemType, "error");
+                util.replyWith("I cannot currently switch your " + itemType, appName, response);
             }
         }
         catch (err) {
             console.log(err);
         }
-
-
 
         return false;
     }

@@ -30,7 +30,19 @@ app.messages.NO_INTENT_FOUND = "I am uncertain what you mean. Kindly rephrase...
 app.pre = function (request, response, type) {
 
     try {
-        var transaction = db.logRequest(request, "Home", "Received request", "info");
+        var currentdate = new Date();
+        var transaction = {
+            "RequestId": (request.data != null && request.data.request != null) ? request.data.request.requestId : "",
+            "SessionId": request.sessionId,
+            "ApplicationId": request.applicationId,
+            "Action": "Server",
+            "UserId": request.userId,
+            "Timestamp": currentdate.getDate() + "/" + (currentdate.getMonth() + 1) + "/" + currentdate.getFullYear() + " @ " + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds(),
+            "Info": "Received request",
+            "Log": "Info"
+        };
+        
+        db.logTransaction(transaction);
 
         if (config.debug === true) {
             // Log the request

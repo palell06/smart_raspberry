@@ -1,7 +1,7 @@
 ﻿{
   "Data": {
     "Name": "Home",
-    "ApplicationId": "",
+    "ApplicationId": "amzn1.ask.skill.192604fb-d697-4051-bbe6-b36e21eeefe9",
     "UserId": "",
     "Password": "",
     "Greeting": "Do you want me to turn something on or off?",

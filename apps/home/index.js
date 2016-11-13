@@ -49,7 +49,7 @@ app.pre = function (request, response, type) {
             console.log(transaction.Timestamp + ' - AWS ASK: ' + transaction.ApplicationId + ' received: ' + transaction.RequestId + ' / ' + transaction.SessionId);
         }
 
-        if (transaction.ApplicationId === home_config.Data.ApplicationId) {
+        if (transaction.ApplicationId !== home_config.Data.ApplicationId) {
             if (config.debug === true) {
                 console.log(transaction.Timestamp + ' - ERROR: Invalid application ID in request: ' + transaction.ApplicationId);
             }

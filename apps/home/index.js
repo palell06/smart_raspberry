@@ -80,15 +80,19 @@ app.intent("SwitchIntent",
     function (request, response) {
 
         try {
+            
             var itemType = request.slot("ItemType");
             var action = request.slot("Action");
             var location = request.slot("Location");
+
+            console.log(JSON.stringify(request.slot));
 
             if (config.debug === true) {
                 console.log("Switch intent slots: Action=\"" + action + "\", ItemType=\"" + itemType + "\" Location=\"" + location + "\"");
             }
 
             if (itemType && location) {
+
                 var item = config.getItem(itemType, location);
             } else {
                 //db.logRequest(request, "Switch", "Action: " + action + " ItemType: " + itemType + " Location: " + Location + ". Unable to find correct item. Please check the configuration of the home automation controller", "error");

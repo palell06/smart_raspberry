@@ -12,6 +12,18 @@
         "{to |} {turn|switch|flip} {the|my |} {-|Location} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action}",
         "{to |} {turn|switch|flip} {the|my |} {light|lights|motion lighting|fan|stove|music|ItemName} {ON|OFF|Action} {in the |} {-|Location}"
       ],
+      "SetColor": [
+        "{to |} {set|change|switch} {the|my |} {-|Location} {light|lights|lighting} color {to |} {-|Color}",
+        "{to |} {set|change|switch} {the|my |} {light|lights|lighting} color in the {-|Location} {to |} {-|Color}",
+        "color {the|my |} {light|lights|lighting} in the {-|Location} {to |} {-|Color}",
+        "color {the|my |} {-|Location} {light|lights} {to |} {-|Color}",
+        "make {the|my |} {-|Location} {light|lights} {-|Color}"
+      ],
+      "SetDim": [
+        "{to |} {dim|turn down|turn up|soften|adjust} {the|my |} {light|lights|lighting|ItemName} {in the |} {-|Location} to {0-100 by 5|Percent} {percent |}",
+        "{to |} {dim|turn down|turn up|soften|adjust} {the|my |} {-|Location} {light|lights|lighting|ItemName} to {0-100 by 5|Percent} {percent |}",
+        "{to |} {set|turn down|turn up|adjust} {the|my |} {-|Location} {volume|ItemName} to {0-100 by 5|Percent} {percent |}"
+      ],
       "Stop": [
         "{to |} stop {that |}",
         "{to |} quit {that |}",

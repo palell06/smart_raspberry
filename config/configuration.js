@@ -16,6 +16,18 @@ function getItem(itemType, location)
     return false;
 }
 
+function getColor(colorName)
+{
+    for (var key in config.Data.Colors)
+    {
+        if (key.toUpperCase() = color.toUpperCase()) {
+            return config.Data.Colors[key];
+        }
+    }
+
+    return false;
+}
+
 function washItemType(itemType)
 {
     itemType = itemType.toUpperCase();

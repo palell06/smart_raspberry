@@ -166,6 +166,107 @@ app.intent("SwitchIntent",
     }
 );  
 
+app.intent("SetColorIntent",
+    {
+        "slots":
+        {
+            "Location": "LOCATION_TYPE",
+            "Color": "COLOR_TYPE"
+        },
+        "utterances": home_config.Data.Utterances.SetColor
+    },
+    function (request, response) {
+
+        try {
+            var color = request.slot("Color");
+            var location = request.slot("Location");
+
+            if (config.debug === true) {
+                console.log("SetColor intent slots: Color=\"" + color + "\" Location=\"" + location + "\"");
+            }
+
+            if (color && location) {
+                var item = helper.getItem("lights", location);
+                var hsb = helper.getColor(color);
+
+                if (item && hsb) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: "  + item);
+                            }
+                        }
+                        else {
+                            if (state === hsb) {
+                                util.replyWith("Your " + location + " lights color is already " + color, appName, response);
+                            } else if (state !== hsb) {
+                                home_automation.setState(item, hsb);
+                                util.replyWith("Setting your " + location + " lights color to " + color, appName, response);
+                            }
+                        }
+                    });
+                } else if (!item && hsb) {
+                    util.replyWith("I cannot set the lights color of the " + location + " to " + color, appName, response);
+                } else if (!item && !hsb) {
+                    util.replyWith("I cannot set that color", appName, response);
+                } else if (item && !hsb) {
+                    util.replyWith("I cannot set that color", appName, response);
+                }
+
+            } else if (color && !location) {
+                var item = helper.getItem("lights", "all");
+                var hsb = helper.getColor(color);
+
+                if (item && hsb) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: " + item);
+                            }
+                        }
+                        else {
+                            if (state === hsb) {
+                                util.replyWith("The house`s lights is already " + color, appName, response);
+                            } else if (state !== hsb) {
+                                home_automation.setState(item, hsb);
+                                util.replyWith("Setting lights color to " + color, appName, response);
+                            }
+                        }
+                    });
+                } else if (!item && hsb) {
+                    util.replyWith("I cannot set the lights color of the house to " + color, appName, response);
+                } else if (!item && !hsb) {
+                    util.replyWith("I cannot set that color", appName, response);
+                } else if (item && !hsb) {
+                    util.replyWith("I cannot set that color", appName, response);
+                }
+                
+            } else {
+                util.replyWith("I cannot set that color", appName, response);
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+        
+        return false;
+    });
+
+app.intent("SetDimIntent",
+    {
+        "slots":
+        {
+            "Percent": "NUMBER",
+            "ItemName": "LITERAL",
+            "Location": "LOCATION_TYPE"
+        },
+        "utterances": home_config.Data.Utterances.SetDim
+    }, function (request, response) {
+        var percent = request.slot('Percent');
+        var itemType = request.slot('ItemName');
+        var location = request.slot('Location');
+    });
+
 app.intent("StopIntent",
     {
         "utterances": home_config.Data.Utterances.Stop

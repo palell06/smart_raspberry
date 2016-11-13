@@ -17,6 +17,20 @@
       "Password": "13jkjygn"
     },
     "Locations": [ "all", "house", "living", "great", "kitchen", "master bedroom", "guest bedroom", "data center", "garage", "office", "foyer", "utility", "inside", "indoor", "outside", "outdoor" ],
+    "Colors": {
+      "white": "0,0,100",
+      "red": "  0,100,100",
+      "orange": "40,100,100",
+      "yellow": "60,100,100",
+      "green":  "100,100,100",
+      "aqua":   "180,100,100",
+      "blue":   "240,100,100",
+      "purple":  "290,100,100",
+      "magenta": "310,100,100",
+      "pink":    "330,100,100",
+      "black":   "0,0,0",
+       "default": "0,0,100"
+    },
     "Items": {
       "Lights": {
         "bedroom": "Light_Group_Bed",

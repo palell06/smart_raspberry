@@ -81,11 +81,9 @@ app.intent("SwitchIntent",
 
         try {
             
-            var itemType = request.slot("ItemType");
+            var itemType = request.slot("ItemName");
             var action = request.slot("Action");
             var location = request.slot("Location");
-
-            console.log(JSON.stringify(request.slot));
 
             if (config.debug === true) {
                 console.log("Switch intent slots: Action=\"" + action + "\", ItemType=\"" + itemType + "\" Location=\"" + location + "\"");

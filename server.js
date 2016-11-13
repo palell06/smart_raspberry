@@ -28,7 +28,7 @@ AlexaAppServer.start({
     // If it returns a Promise, request processing pauses until the Promise resolves.
     //    The value passed on by the promise (if any) replaces the request json.
     preRequest: function (json, request, response) {
-        db.logRequest(request, "Server", "Received request...", "info");
+        //db.logRequest(request, "Server", "Received request...", "info");
     },
     // Like post(), but this function is fired after every request. It has a final 
     // opportunity to modify the JSON response before it is returned back to the
@@ -38,6 +38,6 @@ AlexaAppServer.start({
     // If it returns a Promise, response processing pauses until the Promise resolves.
     //    The value passed on by the promise (if any) replaces the response json.
     postRequest: function (json, request, response) {
-        db.logRequest(request, "Server", "Finished processing request", "info");
+        //db.logRequest(request, "Server", "Finished processing request", "info");
     }
 });

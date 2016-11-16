@@ -91,63 +91,87 @@ app.intent("SwitchIntent",
 
             if (itemType && location) {
 
-                var item = config.getItem(itemType, location);
+               
             } else if (itemType && !location) {
-                var item = config.getItem(itemType, "all"); 
+                
             } else {
                 //db.logRequest(request, "Switch", "Action: " + action + " ItemType: " + itemType + " Location: " + Location + ". Unable to find correct item. Please check the configuration of the home automation controller", "error");
                 util.replyWith("I cannot switch that", appName, response);
                 return;
             }
 
-            if (action && itemType && location && item) {
-                home_automation.getState(item, function (error, state) {
-                    if (error) {
-                        if (config.debug === true) {
-                            console.log("Unable to get the state of " + item + ": " + error.message);
+            if (action && itemType && location) {
+                var item = config.getItem(itemType, location);
+
+                if (item) {
+                    home_automation.getState(item, function (error, state) {
+                        if (error) {
+                            if (config.debug === true) {
+                                console.log("Unable to get the state of " + item + ": " + error.message);
+                            }
+
+                            //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
                         }
 
-                        //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
-                    }
+                        var NextAction = action.toUpperCase();
+                        if (state === NextAction) {
+                            //db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
+                            util.replyWith("Your " + location + " " + itemType + " is already " + action, appName, response);
+                        }
+                        else if (state !== action) {
+                            if (home_automation.setState(item, NextAction)) {
+                                //db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + itemType, "info");
+                                util.replyWith("Switching " + action + " your " + location + " " + itemType, appName, response);
+                            } else {
+                                util.replyWith("I was unable to switch " + action + " the " + itemType + " in the " + location, appName, response);
+                            }
 
-                    var NextAction = action.toUpperCase();
-                    if (state === NextAction) {
-                        //db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
-                        util.replyWith("Your " + location + " " + itemType + " is already " + action, appName, response);
-                    }
-                    else if (state !== action) {
-                        home_automation.setState(item, NextAction);
-                        //db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + itemType, "info");
-                        util.replyWith("Switching " + action + " your " + location + " " + itemType, appName, response);
-                    } else {
-                        //db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + itemType, "error");
-                        util.replyWith("I could not switch " + action + "in your " + location + " " + itemType, appName, response);
-                    }
-                });
-            } else if (action && itemType && item && !location) {
-                home_automation.getState(item, function (error, state) {
-                    if (error) {
-                        if (config.debug === true) {
-                            console.log("Unable to get the state of " + item + ": " + error.message);
+                        } else {
+                            //db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + itemType, "error");
+                            util.replyWith("I could not switch " + action + "in your " + location + " " + itemType, appName, response);
+                        }
+                    });
+                } else {
+
+                    util.replyWith("I could not switch " + action + "in your " + location + " " + itemType, appName, response);
+                }
+                
+            } else if (action && itemType) {
+
+                var item = config.getItem(itemType, "all");
+
+                if (item) {
+                    home_automation.getState(item, function (error, state) {
+                        if (error) {
+                            if (config.debug === true) {
+                                console.log("Unable to get the state of " + item + ": " + error.message);
+                            }
+
+                            //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
                         }
 
-                        //db.logRequest(request, "Switch", "Unable to get the state of " + item + ": " + error.message, "error");
-                    }
+                        var NextAction = action.toUpperCase();
+                        if (state === NextAction) {
+                            //db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
+                            util.replyWith("The " + itemType + " is already " + action, appName, response);
+                        }
+                        else if (state !== action) {
+                            if (home_automation.setState(item, NextAction)) {
+                                //db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + itemType, "info");
+                                util.replyWith("Switching " + action + " " + itemType, appName, response);
+                            } else {
+                                util.replyWith("I was unable to switch " + action + " the " + itemType);
+                            }
 
-                    var NextAction = action.toUpperCase();
-                    if (state === NextAction) {
-                        //db.logRequest(request, "Your " + location + " " + itemType + " is already " + action, "warning");
-                        util.replyWith("The " + itemType + " is already " + action, appName, response);
-                    }
-                    else if (state !== action) {
-                        home_automation.setState(item, NextAction);
-                        //db.logRequest(request, "Switch", "Switching " + action + " your " + location + " " + itemType, "info");
-                        util.replyWith("Switching " + action +  " " + itemType, appName, response);
-                    } else {
-                        //db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + itemType, "error");
-                        util.replyWith("I could not switch " + action + + " " + itemType, appName, response);
-                    }
-                });
+                        } else {
+                            //db.logRequest(request, "Switch", "I could not switch " + action + " in your " + location + " " + itemType, "error");
+                            util.replyWith("I could not switch " + action + + " " + itemType, appName, response);
+                        }
+                    });
+                } else {
+                    util.replyWith("I could not switch " + action + + " " + itemType, appName, response);
+                }
+               
             }
             else if (location) {
                 //db.logRequest(request, "Switch", "I cannot currently switch your " + location + " " + itemType, "error");
@@ -200,8 +224,12 @@ app.intent("SetColorIntent",
                             if (state === hsb) {
                                 util.replyWith("Your " + location + " lights color is already " + color, appName, response);
                             } else if (state !== hsb) {
-                                home_automation.setState(item, hsb);
-                                util.replyWith("Setting your " + location + " lights color to " + color, appName, response);
+                                if (home_automation.setState(item, hsb)) {
+                                    util.replyWith("Setting your " + location + " lights color to " + color, appName, response);
+                                } else {
+                                    util.replyWith("I was unable to the set " + location + " lights color to " + color, appName, response);
+                                }
+                                
                             }
                         }
                     });
@@ -228,8 +256,12 @@ app.intent("SetColorIntent",
                             if (state === hsb) {
                                 util.replyWith("The house`s lights is already " + color, appName, response);
                             } else if (state !== hsb) {
-                                home_automation.setState(item, hsb);
-                                util.replyWith("Setting lights color to " + color, appName, response);
+                                if (home_automation.setState(item, hsb)) {
+                                    util.replyWith("Setting lights color to " + color, appName, response);
+                                } else {
+                                    util.replyWith("I was unable to set the lights color to " + color, appName, response);
+                                }
+                                
                             }
                         }
                     });
@@ -262,9 +294,127 @@ app.intent("SetDimIntent",
         },
         "utterances": home_config.Data.Utterances.SetDim
     }, function (request, response) {
-        var percent = request.slot('Percent');
-        var itemType = request.slot('ItemName');
-        var location = request.slot('Location');
+
+        try {
+            var percent = request.slot('Percent');
+            var itemType = request.slot('ItemName');
+            var location = request.slot('Location');
+
+            if (config.debug) {
+                console.log("SetDim intent slots: Percent=\"" + percent + "\" ItemType=\"" + itemType + "\"");
+            }
+
+            if (percent && itemType && location) {
+
+                var item = helper.getItem(itemType, location);
+
+                if (item) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: " + item);
+                            }
+                        } else {
+                            if (state === percent) {
+                                util.replyWith("Your " + location + " " + itemType + " are already at " + percent + " percent", appName, response);
+                            } else {
+                                if (home_automation.setState(item, percent)) {
+                                    util.replyWith("Dimming your " + location + " " + itemType + " to " + percent + " percent", appName, response);
+                                } else {
+                                    util.replyWith("I was unable to dim your " + location + " " + itemType + " to " + percent + " percent", appName, response);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    util.replyWith("I was unable to dim your " + location + " " + itemType + " to " + percent + " percent", appName, response);
+                }
+            }
+            else if (percent && itemType) {
+
+                var item = helper.getItem(itemType, "all");
+
+                if (item) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: " + item);
+                            }
+                        } else {
+                            if (state === percent) {
+                                util.replyWith("Your " + itemType + " are already at " + percent + " percent", appName, response);
+                            } else {
+                                if (home_automation.setState(item, percent)) {
+                                    util.replyWith("Dimming your " + itemType + " to " + percent + " percent", appName, response);
+                                } else {
+                                    util.replyWith("I was unable to dim your " + itemType + " to " + percent + " percent", appName, response);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    util.replyWith("I was unable to dim your " + itemType + " to " + percent + " percent", appName, response);
+                }
+
+            }
+            else if (location && percent) {
+                var item = helper.getItem("Lights", location);
+
+                if (item) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: " + item);
+                            }
+                        } else {
+                            if (state === percent) {
+                                util.replyWith("Your " + location + " lights are already at " + percent + " percent", appName, response);
+                            } else {
+                                if (home_automation.setState(item, percent)) {
+                                    util.replyWith("Dimming your " + location + " lights to " + percent + " percent", appName, response);
+                                } else {
+                                    util.replyWith("I was unable to dim your " + location + " lights to " + percent + " percent", appName, response);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    util.replyWith("I was unable to dim your " + location + " lights to " + percent + " percent", appName, response);
+                }
+
+            } else if (percent) {
+                var item = helper.getItem("Lights", "all");
+
+                if (item) {
+                    home_automation.getState(item, function (err, state) {
+                        if (err) {
+                            if (config.debug) {
+                                console.log("Unable to get the state of the item: " + item);
+                            }
+                        } else {
+                            if (state === percent) {
+                                util.replyWith("Your lights are already at " + percent + " percent", appName, response);
+                            }
+                            else {
+                                if (home_automation.setState(item, percent)) {
+                                    util.replyWith("Dimming your lights to " + percent + " percent", appName, response);
+                                } else {
+                                    util.replyWith("I was unable to dim your lights to " + percent + " percent", appName, response);
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    util.replyWith("I was unable to dim your lights to " + percent + " percent", appName, response);
+                }
+            } else {
+                util.replyWith("It seems that I am unable to do that");
+            }
+        }
+        catch (err) {
+            console.log(err);
+        }
+        
     });
 
 app.intent("StopIntent",
